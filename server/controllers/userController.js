@@ -238,7 +238,7 @@ export const sendConnectionRequest = async (req, res) => {
 
             await inngest.send({
                 name: 'app/connection-request',
-                data: {}
+                data: {connectionId: newConnection._id}
             })
 
             return res.json({success: true, message: 'Connection request sent successfully'})
