@@ -14,22 +14,11 @@ export const addUserStory = async (req, res) => {
 
         // upload media to imagekit
         if (media_type === 'image' || media_type === 'video') {
-            // upload media to imagekit (imageKit - NodeJS SDK 2024 experimental)
-            // const fileBuffer = fs.readFileSync(media.path)
-            // const response = await imagekit.upload({
-            //     file: fileBuffer,
-            //     fileName: media.originalname,
-            // })
-            // media_url = response.url
-
-            // upload media to imagekit (imageKit - NodeJS SDK 2026)
             const response = await imagekit.files.upload({
                 file: fs.createReadStream(media.path),
                 fileName: media.originalname,
                 folder: 'stories',
             });
-
-            // const original_url = response.url;   // comment out but might need for future use
 
             // optimized URLs
             if (media_type === 'image') {

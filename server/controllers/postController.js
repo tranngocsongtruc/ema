@@ -15,24 +15,6 @@ export const addPost = async (req, res) => {
         if(images.length){
             image_urls = await Promise.all(
                 images.map(async (image) => {
-                    // (imageKit - NodeJS SDK 2024 experimental)
-                    // const fileBuffer = fs.readFileSync(image_urls.path)
-                    // const response = await imagekit.upload({
-                    //     file: fileBuffer,
-                    //     fileName: image.originalname,
-                    //     folder: "posts",
-                    // })
-
-                    // const url = imagekit.url({
-                    //     path: response.filePath,
-                    //     transformation: [
-                    //         {quality: 'auto'},
-                    //         {format: 'webp'},
-                    //         {width: '1280'}
-                    //     ]
-                    // })
-                    // return url
-
                     const response = await imagekit.files.upload({
                         file: fs.createReadStream(image.path),
                         fileName: image.originalname,

@@ -41,22 +41,6 @@ export const sendMessage = async (req, res) => {
         let message_type = image ? 'image' : 'text';
 
         if (message_type === 'image'){
-            // (imageKit - NodeJS SDK 2024 experimental)
-            // const fileBuffer = fs.readFileSync(image.path);
-            // const response = await imagekit.upload({
-            //     file: fileBuffer,
-            //     fileName: image.originalname,
-            // });
-            // media_url = imagekit.url({
-            //     path: response.filePath,
-            //     transformation: [
-            //         {quality: 'auto'},
-            //         {format: 'webp'},
-            //         {width: '1280'}
-            //     ]
-            // })
-
-            // (imageKit - NodeJS SDK 2026)
             const response = await imagekit.files.upload({
                 file: fs.createReadStream(image.path),
                 fileName: image.originalname,

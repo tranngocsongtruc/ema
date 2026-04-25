@@ -47,26 +47,7 @@ export const updateUserData = async (req, res) => {
         const profile = req.files.profile && req.files.profile[0]
         const cover = req.files.cover && req.files.cover[0]
 
-        // // upload profile picture (imageKit - NodeJS SDK 2024 experimental)
-        // if(profile){
-        //     const buffer = fs.readFileSync(profile.path)
-        //     const response = await imagekit.upload({
-        //         file: buffer,
-        //         fileName: profile.originalname,
-        //     })
-
-        //     const url = imagekit.url({
-        //         path: response.filePath,
-        //         transformation: [
-        //             {quality: 'auto'},
-        //             {format: 'webp'},
-        //             {width: '512'}
-        //         ]
-        //     })
-        //     updatedData.profile_picture = url;
-        // }
-
-        // upload profile picture (imageKit - NodeJS SDK 2026)
+        // upload profile picture
         if (profile) {
             const response = await imagekit.files.upload({
             file: fs.createReadStream(profile.path),
@@ -88,26 +69,7 @@ export const updateUserData = async (req, res) => {
             if (fs.existsSync(profile.path)) fs.unlinkSync(profile.path);
         }
 
-        // // upload cover photo (imageKit - NodeJS SDK 2024 experimental)
-        // if(cover){
-        //     const buffer = fs.readFileSync(cover.path)
-        //     const response = await imagekit.upload({
-        //         file: buffer,
-        //         fileName: cover.originalname,
-        //     })
-
-        //     const url = imagekit.url({
-        //         path: response.filePath,
-        //         transformation: [
-        //             {quality: 'auto'},
-        //             {format: 'webp'},
-        //             {width: '1280'}
-        //         ]
-        //     })
-        //     updatedData.cover_photo = url;
-        // }
-
-        // upload cover photo (imageKit - NodeJS SDK 2026)
+        // upload cover photo
         if (cover) {
             const response = await imagekit.files.upload({
                 file: fs.createReadStream(cover.path),

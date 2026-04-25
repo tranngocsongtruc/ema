@@ -1,4 +1,4 @@
-// import logo from './ema_logo_transparent.gif'
+import logo_gif from './ema_logo_transparent.gif'
 import logo from './ema_logo_svg_transparent.svg'
 import default_cover from './default_cover.png'
 import default_profile from './default_profile.png'
@@ -8,6 +8,7 @@ import { Home, MessageCircle, Search, UserIcon, Users } from 'lucide-react'
 import event_sample_img from './event_sample_img.png'
 
 export const assets = {
+    logo_gif,
     logo,
     default_cover,
     default_profile,

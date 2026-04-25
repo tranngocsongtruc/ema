@@ -17,6 +17,8 @@ import { fetchUser } from './features/user/userSlice'
 import { fetchConnections } from './features/connections/connectionsSlice'
 import { addMessages } from './features/messages/messagesSlice'
 import Notification from './components/Notification'
+import Privacy from './pages/Privacy'
+import Accessibility from './pages/Accessibility'
 
 const App = () => {
   const {user} = useUser()
@@ -76,6 +78,8 @@ const App = () => {
           <Route path='profile/:profileId' element={<Profile />}/>
           <Route path='create-post' element={<CreatePost />}/>
         </Route>
+        <Route path='/privacy' element={<Privacy />} />
+        <Route path='/accessibility' element={<Accessibility />} />
       </Routes>
     </>
   )

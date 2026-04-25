@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react"
-import { dummyMessagesData, dummyUserData } from "../assets/assets"
 import { ImageIcon, SendHorizonal } from "lucide-react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
@@ -9,10 +8,9 @@ import { addMessages, fetchMessages, resetMessages } from "../features/messages/
 import toast from "react-hot-toast"
 
 const ChatBox = () => {
-
-    const {messages} = useSelector((state)=>state.messages)
-    const {userId} = useParams()
-    const {getToken} = useAuth()
+    const { messages } = useSelector((state) => state.messages)
+    const { userId } = useParams()
+    const { getToken } = useAuth()
     const dispatch = useDispatch()
 
     const [text, setText] = useState('')
@@ -25,7 +23,7 @@ const ChatBox = () => {
     const fetchUserMessages = async () => {
         try {
             const token = await getToken()
-            dispatch(fetchMessages({token, userId}))
+            dispatch(fetchMessages({ token, userId }))
         } catch (error) {
             toast.error(error.message)
         }
@@ -36,13 +34,13 @@ const ChatBox = () => {
             if (!text && !image) return
 
             const token = await getToken()
-            const formData = new FormData();
+            const formData = new FormData()
             formData.append('to_user_id', userId)
-            formData.append('text', text);
-            image && formData.append('image', image);
+            formData.append('text', text)
+            image && formData.append('image', image)
 
-            const {data} = await api.post('/api/message/send', formData, {
-                headers: {Authorization: `Bearer ${token}`}
+            const { data } = await api.post('/api/message/send', formData, {
+                headers: { Authorization: `Bearer ${token}` }
             })
 
             if (data.success) {
@@ -63,90 +61,110 @@ const ChatBox = () => {
         return () => {
             dispatch(resetMessages())
         }
-    },[userId])
+    }, [userId])
 
-    useEffect(()=>{
-        if(connections.length > 0) {
-            const user = connections.find(connection => connection._id === userId)
-            setUser(user)
+    useEffect(() => {
+        if (connections.length > 0) {
+            const selectedUser = connections.find((connection) => connection._id === userId)
+            setUser(selectedUser)
         }
-    },[connections, userId])
+    }, [connections, userId])
 
-    useEffect(()=>{
-        messagesEndRef.current?.scrollIntoView({behavior: "smooth"})
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [messages])
 
     return user && (
-        <div className="flex flex-col h-screen">
-            <div className="flex items-center gap-2 p-2 md:px-10 xl:pl-42 bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-gray-300">
-                <img 
-                    src={user.profile_picture} 
+        <div className="flex flex-col h-screen app-shell">
+            {/* Header */}
+            <div className="flex items-center gap-3 px-5 py-4 bg-[var(--surface)] border-b border-[var(--border)]">
+                <img
+                    src={user.profile_picture}
                     alt="the profile picture of the user you are chatting with"
-                    className="size-8 rounded-full" />
+                    className="w-10 h-10 rounded-full object-cover"
+                />
 
                 <div>
-                    <p className="font-medium">{user.full_name}</p>
-                    <p className="text-sm text-gray-500 -mt-1.5">@{user.username}</p>
+                    <p className="font-medium text-[var(--text)]">{user.full_name}</p>
+                    <p className="text-sm text-[var(--muted)]">@{user.username}</p>
                 </div>
             </div>
 
-            <div className="p-5 md:px-10 h-full overflow-y-scroll">
-                <div className="space-y-4 max-w-4xl mx-auto">
-                    {
-                        messages.toSorted((a,b)=> new Date(a.createdAt) - new Date(b.createdAt)).map((message, index)=>(
-                            <div
-                                key={index}
-                                className={`flex flex-col ${message.to_user_id !== user._id ? 'items-start' : 'items-end'}`}
-                            >
-                                <div className={`p-2 text-sm max-w-sm bg-white text-slate-700 rounded-lg shadow ${message.to_user_id !== user._id ? 'rounded-bl-none' : 'rounded-br-none'}`}>
-                                    {message.message_type === 'image' 
-                                        && 
-                                        <img 
-                                            src={message.media_url} 
-                                            className="w-full max-w-sm rounded-lg mb-1" 
-                                            alt="the image attached to the massage" 
-                                        />
-                                    }
-                                    <p>{message.text}</p>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-scroll px-4 py-5">
+                <div className="space-y-4 max-w-3xl mx-auto">
+                    {messages
+                        .toSorted((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+                        .map((message, index) => {
+                            const isIncoming = message.to_user_id !== user._id
+
+                            return (
+                                <div
+                                    key={index}
+                                    className={`flex ${isIncoming ? 'justify-start' : 'justify-end'}`}
+                                >
+                                    <div
+                                        className={`max-w-sm text-sm rounded-lg px-3 py-2 shadow-sm border ${
+                                            isIncoming
+                                                ? 'bg-[var(--surface)] text-[var(--text)] border-[var(--border)]'
+                                                : 'bg-[var(--brand-soft)] text-[var(--text)] border-[#cddcc7]'
+                                        }`}
+                                    >
+                                        {message.message_type === 'image' && (
+                                            <img
+                                                src={message.media_url}
+                                                className="w-full max-w-sm rounded-lg mb-2"
+                                                alt="the image attached to the message"
+                                            />
+                                        )}
+                                        <p>{message.text}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    }
+                            )
+                        })}
                     <div ref={messagesEndRef} />
                 </div>
             </div>
 
-            <div className="px-4">
-                <div className="flex items-center gap-3 pl-5 p-1.5 bg-white w-full max-w-xl mx-auto border border-gray-200 shadow rounded-full mb-5">
-                    <input 
-                        type="text" 
-                        className="flex-1 outline-none text-slate-700" 
+            {/* Composer */}
+            <div className="px-4 pb-5">
+                <div className="flex items-center gap-3 pl-4 pr-2 py-2 bg-[var(--surface)] w-full max-w-2xl mx-auto border border-[var(--border)] shadow-sm rounded-full">
+                    <input
+                        type="text"
+                        className="flex-1 bg-transparent outline-none text-[var(--text)] placeholder:text-[var(--muted-soft)]"
                         placeholder="Type a message..."
-                        onKeyDown={e=>e.key === 'Enter' && sendMessage()}
-                        onChange={(e)=>setText(e.target.value)}
-                        value={text} />
+                        onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+                        onChange={(e) => setText(e.target.value)}
+                        value={text}
+                    />
 
-                    <label htmlFor="image">
-                        {
-                            image 
-                            ? <img 
-                                src={URL.createObjectURL(image)} 
+                    <label htmlFor="image" className="cursor-pointer">
+                        {image ? (
+                            <img
+                                src={URL.createObjectURL(image)}
                                 alt="the image attached to the message"
-                                className="h-8 rounded" /> 
-                            : <ImageIcon className="size-7 text-gray-400 cursor-pointer" />
-                        }
-                        <input type="file" id='image' accept="image/*" hidden onChange={(e)=>setImage(e.target.files[0])} />
+                                className="h-8 w-8 rounded-md object-cover"
+                            />
+                        ) : (
+                            <ImageIcon className="size-6 text-[var(--muted)]" />
+                        )}
+                        <input
+                            type="file"
+                            id="image"
+                            accept="image/*"
+                            hidden
+                            onChange={(e) => setImage(e.target.files[0])}
+                        />
                     </label>
 
-                    <button 
+                    <button
                         onClick={sendMessage}
-                        className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-700 hover:to-purple-800 active:scale-95 cursor-pointer text-white p-2 rounded-full"
+                        className="primary-btn active:scale-[0.98] transition text-white p-2 rounded-full"
                     >
                         <SendHorizonal size={18} />
                     </button>
                 </div>
             </div>
-
         </div>
     )
 }
