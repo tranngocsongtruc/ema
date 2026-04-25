@@ -78,45 +78,42 @@ Backend architecture includes:
 ---
 
 ## Currently Working On
-- Connecting ImageKit for image storage
-- Connecting backend and frontend with live API data
-- Adding message notifications on the website
-- Deploying the project online
 - Changing the way authentication works and creating the concept of different communities
-
+- Tighten app security
+  
 ---
 
 ## User Interface Preview
 
 ### 1. Log In page
-<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/1dae850c-67d8-4464-9c1f-b28adc2373cc" />
+<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/2636167f-2d77-407e-b8cc-4eb908c8e35d" />
 
 ### 2. Feed
-<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/796036dd-b927-4613-b80d-f83170b6e674" />
+<img width="3454" height="1926" alt="image" src="https://github.com/user-attachments/assets/d8d1562c-af88-467f-bd73-cdb71abc17c9" />
 
 ### 3. Messages
-<img width="3456" height="1928" alt="image" src="https://github.com/user-attachments/assets/20b5d431-6ee6-4323-97f8-0dadd09cd2fc" />
+<img width="1728" height="963" alt="image" src="https://github.com/user-attachments/assets/8091ca92-8e43-4a52-b94e-9f7233c335b5" />
 
 ### 4. Connections
-<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/840b5909-4b38-4300-8dca-a54a599eed7e" />
+<img width="1728" height="963" alt="image" src="https://github.com/user-attachments/assets/dff70135-c67b-4136-ab97-ed4320d5e4b4" />
 
 ### 5. Discover
-<img width="3456" height="1928" alt="image" src="https://github.com/user-attachments/assets/69f5eecd-473c-42c4-83b4-c3ba09e728bc" />
+<img width="1728" height="965" alt="image" src="https://github.com/user-attachments/assets/ca47c1f8-608e-4234-b8a6-4dcfe350130e" />
 
 ### 6. Profile
-<img width="3456" height="1930" alt="image" src="https://github.com/user-attachments/assets/83363ec4-026b-4394-9575-057ce943b7e1" />
+<img width="3456" height="1928" alt="image" src="https://github.com/user-attachments/assets/996aabd0-0b8b-44c3-9c85-a3cfeceb8dc5" />
 
 ### 7. Edit Profile Modal
-<img width="3456" height="1924" alt="image" src="https://github.com/user-attachments/assets/7503633e-f9d5-4ead-92df-46379263e83d" />
+<img width="3456" height="1924" alt="image" src="https://github.com/user-attachments/assets/77301cd9-1908-468e-81ca-003c88687158" />
 
 ### 8. Create Story Modal
-<img width="3456" height="1922" alt="image" src="https://github.com/user-attachments/assets/1b5598e2-57ed-4ae4-b701-6f8ae599aab4" />
+<img width="3456" height="1924" alt="image" src="https://github.com/user-attachments/assets/94f6f877-9b8e-4078-bab7-0304dcde52b3" />
 
 ### 9. Create Post
-<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/9a420549-a007-40e0-890c-3b34ec28fa33" />
+<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/6179b99e-6479-4f51-9698-361d7c849333" />
 
 ### 10. Messaging
-<img width="3456" height="1926" alt="image" src="https://github.com/user-attachments/assets/3e39fcf1-e68f-47d7-b22c-b6f5e5fffea6" />
+<img width="1728" height="964" alt="image" src="https://github.com/user-attachments/assets/6f9e0ed6-80e9-43d9-829e-ba7c1b89c482" />
 
 ---
 
