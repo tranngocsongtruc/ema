@@ -14,7 +14,7 @@
 > A full-stack social networking platform focused on creating a calmer, more intentional space for people to connect, share, and express themselves without the overstimulation of traditional social apps.
 
 ---
-*Work In Progress*
+*Debugging authentication issue that is involved with the latest change of frontend apr 25 2026*
 
 ## Tech Stack
 
